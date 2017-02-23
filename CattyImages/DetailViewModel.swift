@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import Moya
 
-struct DetailViewModel {
+class DetailViewModel {
     let title: Observable<String>
     let uri: Observable<URL>
     let caption: Observable<String>
@@ -35,6 +35,7 @@ struct DetailViewModel {
     }
     
     init(ctimage: CTImage) {
+        //updateModel(ct..
         title = Observable.from(ctimage.title)
         assetId = Observable.from(ctimage.imageId)
         let strurl = (ctimage.sizes.first?.strUri)!
@@ -42,4 +43,5 @@ struct DetailViewModel {
         uri = Observable.from(URL.init(string: enstrurl))
         caption = Observable.from(ctimage.caption).catchErrorJustReturn("")
     }
+
 }

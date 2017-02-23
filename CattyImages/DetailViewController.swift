@@ -11,15 +11,18 @@ import Neon
 import SDWebImage
 import RxSwift
 import RxCocoa
+import Agrume
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     
     let catty: CTImage
     let catImageView: UIImageView = UIImageView()
     let captionLabel: UILabel = UILabel()
     let titleLabel: UILabel = UILabel()
     let similarLabel: UILabel = UILabel()
-    let similarCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+    let horiFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+    var similarCollectionView: UICollectionView?
+    
     let disposeBag = DisposeBag()
     
     lazy var viewModel: DetailViewModel = {
@@ -47,7 +50,12 @@ class DetailViewController: UIViewController {
     
     func setupUI() {
         self.view.backgroundColor = UIColor.white
-    
+        
+//        similarCollectionView.isPagingEnabled = true
+        self.navigationController?.navigationBar.isTranslucent = false
+        horiFlowLayout.scrollDirection = .horizontal
+        similarCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: horiFlowLayout)
+        
         catImageView.contentMode = .scaleAspectFit
         self.view.addSubview(catImageView)
         
@@ -61,15 +69,16 @@ class DetailViewController: UIViewController {
         similarLabel.text = "Similar images:"
         self.view.addSubview(similarLabel)
         
-        similarCollectionView.register(UINib.init(nibName: "FeedCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
-        similarCollectionView.backgroundColor = UIColor.white
-        self.view.addSubview(similarCollectionView)
+        similarCollectionView?.register(UINib.init(nibName: "FeedCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
+        similarCollectionView?.backgroundColor = UIColor.white
+        self.view.addSubview(similarCollectionView!)
         
         catImageView.anchorAndFillEdge(.top, xPad: 10, yPad: 10, otherSize: self.view.frame.size.height/2)
         titleLabel.alignAndFillWidth(align: .underCentered, relativeTo: catImageView, padding: 0, height: 20)
         captionLabel.alignAndFillWidth(align: .underCentered, relativeTo: titleLabel, padding: 0, height: 40)
         similarLabel.alignAndFillWidth(align: .underCentered, relativeTo: captionLabel, padding: 0, height: 20)
-        similarCollectionView.alignAndFill(align: .underCentered, relativeTo: similarLabel, padding: 0)
+        similarCollectionView?.alignAndFillWidth(align: .underCentered, relativeTo: similarLabel, padding: 10, height: (self.view.frame.size.width / 3)+10)
+        
     }
     
     func setupRx() {
@@ -81,8 +90,9 @@ class DetailViewController: UIViewController {
             }
             }.disposed(by: disposeBag)
         
+        similarCollectionView?.rx.setDelegate(self).disposed(by: disposeBag)
         viewModel.similarImageList
-            .bindTo(similarCollectionView.rx.items(cellIdentifier: "Cell")) {
+            .bindTo(similarCollectionView!.rx.items(cellIdentifier: "Cell")) {
                 (index, ctimage: CTImage, cell: FeedCollectionViewCell) in
                 let strurl = (ctimage.sizes.first?.strUri)!
                 let enstrurl = (strurl.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed))!
@@ -90,9 +100,26 @@ class DetailViewController: UIViewController {
                 cell.nameLabel.text = ctimage.title
                 cell.imageView.sd_setImage(with: URL.init(string: enstrurl), placeholderImage: UIImage.init(named: "octocat"))
             }.disposed(by: disposeBag)
+        
+        similarCollectionView?.rx.modelSelected(CTImage.self)
+            .subscribe {
+                ctimage in
+                let strurl = (ctimage.element?.sizes.first?.strUri)!
+                let enstrurl = (strurl.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed))!
+                let uri = URL.init(string: enstrurl)!
+                let agrume = Agrume(imageUrl: uri)
+                agrume.showFrom(self)
+            }.disposed(by: disposeBag)
+        
     }
     
-
+    //MARK: - CollecitonView Delegate
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let size = (self.view.frame.size.width / 3)
+        return CGSize(width: size, height: size)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
