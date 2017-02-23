@@ -25,6 +25,7 @@ let GettyProvider = RxMoyaProvider<Getty>(endpointClosure: endpointAuthClosure)
 
 public enum Getty {
     case images(phrase: String)
+    case similar(assetId: String)
 }
 
 extension Getty: TargetType {
@@ -33,6 +34,8 @@ extension Getty: TargetType {
         switch self {
         case .images:
             return "/v3/search/images"
+        case .similar(let assetId):
+            return "/v3/images/\(assetId)/similar"
         }
     }
     public var method: Moya.Method {
@@ -43,6 +46,8 @@ extension Getty: TargetType {
         switch self {
         case .images(let phrase):
             return ["phrase": "cat "+phrase, "page_size": 100]
+        case .similar:
+            return nil
         }
     }
     
@@ -57,6 +62,12 @@ extension Getty: TargetType {
         switch self {
         case .images:
             guard let path = Bundle.main.path(forResource: "sample", ofType: "json"),
+                let data = Data(base64Encoded: path) else {
+                    return Data()
+            }
+            return data
+        case .similar:
+            guard let path = Bundle.main.path(forResource: "similar", ofType: "json"),
                 let data = Data(base64Encoded: path) else {
                     return Data()
             }
