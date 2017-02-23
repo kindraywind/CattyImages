@@ -1,0 +1,26 @@
+{
+    "result_count":100,
+    "images":[
+              {
+              "id": "83454804",
+              "asset_family": "creative",
+              "caption": null,
+              "collection_code": "DV",
+              "collection_id": 13,
+              "collection_name": "Digital Vision",
+              "display_sizes": [
+                                {
+                                "is_watermarked": false,
+                                "name": "thumb",
+                                "uri": "http://cache1.asset-cache.net/xt/83454804.jpg?v=1&g=fs1|0|DV|54|804&s=1&b=MkUw"
+                                }
+                                ],
+              "license_model": "royaltyfree",
+              "max_dimensions": {
+              "height": 3682,
+              "width": 4800
+              },
+              "title": "Portrait of group of kittens"
+              }
+              ]
+}

@@ -7,6 +7,7 @@ target 'CattyImages' do
   pod 'Moya-ObjectMapper'
   pod 'Moya-ObjectMapper/RxSwift'
   pod 'Moya/RxSwift'
+  pod 'NYTPhotoViewer', '~> 1.1.0'
   pod 'Neon'
   pod 'RxCocoa'
   pod 'RxSwift'
