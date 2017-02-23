@@ -34,8 +34,8 @@ extension Getty: TargetType {
         switch self {
         case .images:
             return "/v3/search/images"
-        case .similar(let assetId):
-            return "/v3/images/\(assetId)/similar"
+        case .similar:
+            return "/v3/search/images"
         }
     }
     public var method: Moya.Method {
@@ -46,8 +46,8 @@ extension Getty: TargetType {
         switch self {
         case .images(let phrase):
             return ["phrase": "cat "+phrase, "page_size": 100]
-        case .similar:
-            return nil
+        case .similar(let phrase):
+            return ["phrase": phrase, "page_size": 20]
         }
     }
     

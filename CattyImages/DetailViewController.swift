@@ -9,6 +9,8 @@
 import UIKit
 import Neon
 import SDWebImage
+import RxSwift
+import RxCocoa
 
 class DetailViewController: UIViewController {
     
@@ -16,6 +18,8 @@ class DetailViewController: UIViewController {
     let catImageView: UIImageView = UIImageView()
     let captionLabel: UILabel = UILabel()
     let titleLabel: UILabel = UILabel()
+    let similarCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+    let disposeBag = DisposeBag()
     
     lazy var viewModel: DetailViewModel = {
         return DetailViewModel(ctimage: self.catty)
@@ -35,19 +39,19 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupRx()
 
         // Do any additional setup after loading the view.
     }
     
     func setupUI() {
         self.view.backgroundColor = UIColor.white
-//        let strurl = (self.catty.sizes.first?.strUri)!
-//        let enstrurl = (viewModel.uri.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed))!
         catImageView.sd_setImage(with: viewModel.uri)
         catImageView.contentMode = .scaleAspectFit
         self.view.addSubview(catImageView)
         
-        titleLabel.text = viewModel.title
+        viewModel.title.bindTo(titleLabel.rx.text)
+//        titleLabel.text = viewModel.title
         titleLabel.textAlignment = NSTextAlignment.center
         self.view.addSubview(titleLabel)
         
@@ -56,9 +60,26 @@ class DetailViewController: UIViewController {
         captionLabel.numberOfLines = 2
         self.view.addSubview(captionLabel)
         
+        similarCollectionView.register(UINib.init(nibName: "FeedCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
+        similarCollectionView.backgroundColor = UIColor.white
+        self.view.addSubview(similarCollectionView)
+        
         catImageView.anchorAndFillEdge(.top, xPad: 10, yPad: 10, otherSize: self.view.frame.size.height/2)
-        titleLabel.alignAndFillWidth(align: .underCentered, relativeTo: catImageView, padding: 20, height: 40)
-        captionLabel.alignAndFillWidth(align: .underCentered, relativeTo: titleLabel, padding: 20, height: 60)
+        titleLabel.alignAndFillWidth(align: .underCentered, relativeTo: catImageView, padding: 0, height: 20)
+        captionLabel.alignAndFillWidth(align: .underCentered, relativeTo: titleLabel, padding: 0, height: 40)
+        similarCollectionView.alignAndFill(align: .underCentered, relativeTo: captionLabel, padding: 0)
+    }
+    
+    func setupRx() {
+        viewModel.similarImageList
+            .bindTo(similarCollectionView.rx.items(cellIdentifier: "Cell")) {
+                (index, ctimage: CTImage, cell: FeedCollectionViewCell) in
+                let strurl = (ctimage.sizes.first?.strUri)!
+                let enstrurl = (strurl.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed))!
+                
+                cell.nameLabel.text = ctimage.title
+                cell.imageView.sd_setImage(with: URL.init(string: enstrurl), placeholderImage: UIImage.init(named: "octocat"))
+            }.disposed(by: disposeBag)
     }
     
 
