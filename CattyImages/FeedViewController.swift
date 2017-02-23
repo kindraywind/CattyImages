@@ -13,7 +13,7 @@ import RxSwift
 import RxCocoa
 import UIKit
 
-class FeedViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UISearchBarDelegate {
+class FeedViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     
     let catCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     let searchBar: UISearchBar = UISearchBar()
@@ -21,9 +21,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     let noresLabel:UILabel = UILabel()
     
     let viewModel = FeedViewModel()
-    
-    //TODO: bind rx
-    private var cattyImages: CTImageList?
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +44,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         
         searchBar.placeholder = "...anything about cat..."
         searchBar.frame = CGRect.init(x: 0, y: 0, width: self.view.frame.size.width-20, height: 44)
-        searchBar.delegate = self
 
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: searchBar)
         
@@ -55,12 +52,11 @@ class FeedViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     }
 
     func setupRx() {
-//        let disposeBag = DisposeBag()
         self.searchBar.rx.text
             .orEmpty
             .throttle(0.5, scheduler: MainScheduler.instance)
             .distinctUntilChanged()
-            .bindTo(viewModel.searchText)
+            .bindTo(viewModel.searchText).disposed(by: disposeBag)
         
         viewModel.imageList
             .bindTo(catCollectionView.rx.items(cellIdentifier: "Cell")) {
@@ -70,60 +66,29 @@ class FeedViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
                 
                 cell.nameLabel.text = ctimage.title
                 cell.imageView.sd_setImage(with: URL.init(string: enstrurl), placeholderImage: UIImage.init(named: "octocat"))
-        }
+        }.disposed(by: disposeBag)
+        
+        viewModel.collectionViewShouldHideIfNoItem.bindTo(catCollectionView.rx.isHidden).disposed(by: disposeBag)
         
         catCollectionView.rx.modelSelected(CTImage.self)
             .subscribe {
                 ctimage in
                 let detailViewController = DetailViewController(catty: ctimage.element!)
                 self.navigationController?.pushViewController(detailViewController, animated: true)
-        }
+        }.disposed(by: disposeBag)
         
-        catCollectionView.rx.setDelegate(self)
+        catCollectionView.rx.didScroll.subscribe { _ in
+            self.searchBar.endEditing(true)
+        }.disposed(by: disposeBag)
         
+        catCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
     }
     
-//    func searchCat(searchText: String) {
-//        GettyProvider.request(.images(phrase: searchText))
-//            .mapObject(CTImageList.self)
-//            .subscribe { event -> Void in
-//                switch event {
-//                case .next(let images):
-//                    //TODO: Propery binds cattyImages, eg RAC(self, catty = RACObserv..... need to learn the rx syntax :<
-//                    self.cattyImages = images
-//                    if self.cattyImages?.images.count == 0 {
-//                        UIView.animate(withDuration: 0.7, animations: {
-//                            self.catCollectionView.alpha = 0
-//                        }, completion: { (Bool) in
-//                            self.catCollectionView.isHidden = true
-//                        })
-//                        
-//                    } else {
-//                        self.catCollectionView.isHidden = false
-//                        UIView.animate(withDuration: 0.7, animations: {
-//                            self.catCollectionView.alpha = 1
-//                        }, completion: { (Bool) in
-//                            
-//                        })
-//                    }
-//                    self.catCollectionView.reloadData()
-//                case .error(let error):
-//                    print(error)
-//                default:
-//                    break
-//                }
-//        }
-//    }
-    
-    //MARK: - CollecitonView Delegate, Datasource
+    //MARK: - CollecitonView Delegate
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = (self.view.frame.size.width / 3) - 7
         return CGSize(width: size, height: size)
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        searchBar.endEditing(true)
     }
     
     //MARK: -
