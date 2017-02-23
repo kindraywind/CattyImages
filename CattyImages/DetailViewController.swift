@@ -48,11 +48,12 @@ class DetailViewController: UIViewController {
         
         captionLabel.text = catty.caption
         captionLabel.textAlignment = NSTextAlignment.center
+        captionLabel.numberOfLines = 2
         self.view.addSubview(captionLabel)
         
         catImageView.anchorAndFillEdge(.top, xPad: 10, yPad: 10, otherSize: self.view.frame.size.height/2)
         titleLabel.alignAndFillWidth(align: .underCentered, relativeTo: catImageView, padding: 20, height: 40)
-        captionLabel.alignAndFillWidth(align: .underCentered, relativeTo: titleLabel, padding: 20, height: 40)
+        captionLabel.alignAndFillWidth(align: .underCentered, relativeTo: titleLabel, padding: 20, height: 60)
     }
     
 
