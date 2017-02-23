@@ -20,8 +20,7 @@ struct FeedViewModel {
                 return self.getImages(txt: text)
             }.flatMapLatest { li -> Observable<[CTImage]> in
                 return self.getCTImages(imglist: li)
-            }
-            
+            }.catchErrorJustReturn([])
     }
     
     func getImages(txt: String) -> Observable<CTImageList> {
