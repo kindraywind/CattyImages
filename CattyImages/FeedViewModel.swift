@@ -23,6 +23,13 @@ struct FeedViewModel {
             }.catchErrorJustReturn([])
     }
     
+    var collectionViewShouldHideIfNoItem: Observable<Bool> {
+        return imageList.flatMapLatest { il -> Observable<Bool> in
+            if il.count > 0 { return Observable.from(false) }
+            else { return Observable.from(true) }
+        }
+    }
+    
     func getImages(txt: String) -> Observable<CTImageList> {
         return GettyProvider.request(.images(phrase: txt)).mapObject(CTImageList.self)
     }
