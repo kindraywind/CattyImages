@@ -17,9 +17,14 @@ class DetailViewController: UIViewController {
     let captionLabel: UILabel = UILabel()
     let titleLabel: UILabel = UILabel()
     
+    lazy var viewModel: DetailViewModel = {
+        return DetailViewModel(ctimage: self.catty)
+    }()
+    
     init(catty: CTImage)
     {
         self.catty = catty
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -36,17 +41,17 @@ class DetailViewController: UIViewController {
     
     func setupUI() {
         self.view.backgroundColor = UIColor.white
-        let strurl = (self.catty.sizes.first?.strUri)!
-        let enstrurl = (strurl.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed))!
-        catImageView.sd_setImage(with: URL.init(string: enstrurl))
+//        let strurl = (self.catty.sizes.first?.strUri)!
+//        let enstrurl = (viewModel.uri.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed))!
+        catImageView.sd_setImage(with: viewModel.uri)
         catImageView.contentMode = .scaleAspectFit
         self.view.addSubview(catImageView)
         
-        titleLabel.text = catty.title
+        titleLabel.text = viewModel.title
         titleLabel.textAlignment = NSTextAlignment.center
         self.view.addSubview(titleLabel)
         
-        captionLabel.text = catty.caption
+        captionLabel.text = viewModel.caption
         captionLabel.textAlignment = NSTextAlignment.center
         captionLabel.numberOfLines = 2
         self.view.addSubview(captionLabel)

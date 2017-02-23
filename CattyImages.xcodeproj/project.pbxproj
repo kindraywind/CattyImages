@@ -23,6 +23,7 @@
 		9FF37EAE1E5E1FD100FBD231 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FF37EAC1E5E1FD100FBD231 /* Main.storyboard */; };
 		9FF37EB01E5E2F6100FBD231 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF37EAF1E5E2F6100FBD231 /* DetailViewController.swift */; };
 		9FF37EB31E5EA6D700FBD231 /* CatLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FF37EB21E5EA6D700FBD231 /* CatLaunchScreen.storyboard */; };
+		9FF37EB71E5F2FD600FBD231 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF37EB61E5F2FD600FBD231 /* DetailViewModel.swift */; };
 		A1A82D7472E68776A3627B9C /* Pods_CattyImagesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2089F228E6D4E4B15082E5 /* Pods_CattyImagesUITests.framework */; };
 		C1533CF25624D2BAFCA44AF1 /* Pods_CattyImagesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC43F732552B8E6B95F392E1 /* Pods_CattyImagesTests.framework */; };
 /* End PBXBuildFile section */
@@ -73,6 +74,7 @@
 		9FF37EAD1E5E1FD100FBD231 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9FF37EAF1E5E2F6100FBD231 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		9FF37EB21E5EA6D700FBD231 /* CatLaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CatLaunchScreen.storyboard; sourceTree = "<group>"; };
+		9FF37EB61E5F2FD600FBD231 /* DetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		BC43F732552B8E6B95F392E1 /* Pods_CattyImagesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CattyImagesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F98BA2A5E60A1570DAFA936C /* Pods-CattyImagesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CattyImagesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CattyImagesUITests/Pods-CattyImagesUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -166,15 +168,15 @@
 			children = (
 				9FF37EAC1E5E1FD100FBD231 /* Main.storyboard */,
 				9FCDC6291E5D597B00AA3665 /* AppDelegate.swift */,
+				9FF37EB51E5F2CD600FBD231 /* ViewModels */,
 				9FF37EB11E5E2F6B00FBD231 /* ViewControllers */,
-				9FCDC6591E5D5E3700AA3665 /* FeedViewModel.swift */,
+				9FF37EA71E5E001D00FBD231 /* Cells */,
 				9FCDC6301E5D597B00AA3665 /* Assets.xcassets */,
 				9FCDC6321E5D597B00AA3665 /* LaunchScreen.storyboard */,
 				9FCDC6351E5D597B00AA3665 /* Info.plist */,
 				9F74BD2E1E5D7A4A001B802C /* Client */,
 				9F74BD311E5D863F001B802C /* Objects */,
 				9F74BD2B1E5D7430001B802C /* sampledata */,
-				9FF37EA71E5E001D00FBD231 /* Cells */,
 				9FF37EB21E5EA6D700FBD231 /* CatLaunchScreen.storyboard */,
 			);
 			path = CattyImages;
@@ -214,6 +216,15 @@
 				9FF37EAF1E5E2F6100FBD231 /* DetailViewController.swift */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9FF37EB51E5F2CD600FBD231 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				9FCDC6591E5D5E3700AA3665 /* FeedViewModel.swift */,
+				9FF37EB61E5F2FD600FBD231 /* DetailViewModel.swift */,
+			);
+			name = ViewModels;
 			sourceTree = "<group>";
 		};
 		E0026423847C1ECF20AE173F /* Pods */ = {
@@ -516,6 +527,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FF37EB71E5F2FD600FBD231 /* DetailViewModel.swift in Sources */,
 				9FF37EB01E5E2F6100FBD231 /* DetailViewController.swift in Sources */,
 				9FCDC65A1E5D5E3700AA3665 /* FeedViewModel.swift in Sources */,
 				9FF37EAA1E5E00B900FBD231 /* FeedCollectionViewCell.swift in Sources */,
