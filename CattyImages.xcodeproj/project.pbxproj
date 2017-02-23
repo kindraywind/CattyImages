@@ -11,6 +11,7 @@
 		9F74BD2D1E5D7449001B802C /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 9F74BD2C1E5D7449001B802C /* sample.json */; };
 		9F74BD301E5D8131001B802C /* CTImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F74BD2F1E5D8131001B802C /* CTImage.swift */; };
 		9F74BD331E5DDD92001B802C /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F74BD321E5DDD92001B802C /* FeedViewController.swift */; };
+		9F8FCDDB1E5F3CE100B772C4 /* similar.json in Resources */ = {isa = PBXBuildFile; fileRef = 9F8FCDDA1E5F3CE100B772C4 /* similar.json */; };
 		9FCDC62A1E5D597B00AA3665 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCDC6291E5D597B00AA3665 /* AppDelegate.swift */; };
 		9FCDC6311E5D597B00AA3665 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FCDC6301E5D597B00AA3665 /* Assets.xcassets */; };
 		9FCDC6341E5D597B00AA3665 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FCDC6321E5D597B00AA3665 /* LaunchScreen.storyboard */; };
@@ -56,6 +57,7 @@
 		9F74BD2C1E5D7449001B802C /* sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sample.json; sourceTree = "<group>"; };
 		9F74BD2F1E5D8131001B802C /* CTImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTImage.swift; sourceTree = "<group>"; };
 		9F74BD321E5DDD92001B802C /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		9F8FCDDA1E5F3CE100B772C4 /* similar.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = similar.json; sourceTree = "<group>"; };
 		9FCDC6261E5D597B00AA3665 /* CattyImages.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CattyImages.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FCDC6291E5D597B00AA3665 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9FCDC6301E5D597B00AA3665 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				9F74BD2C1E5D7449001B802C /* sample.json */,
+				9F8FCDDA1E5F3CE100B772C4 /* similar.json */,
 			);
 			name = sampledata;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				9FF37EAE1E5E1FD100FBD231 /* Main.storyboard in Resources */,
 				9F74BD2D1E5D7449001B802C /* sample.json in Resources */,
 				9FCDC6311E5D597B00AA3665 /* Assets.xcassets in Resources */,
+				9F8FCDDB1E5F3CE100B772C4 /* similar.json in Resources */,
 				9FF37EB31E5EA6D700FBD231 /* CatLaunchScreen.storyboard in Resources */,
 				9FF37EAB1E5E00B900FBD231 /* FeedCollectionViewCell.xib in Resources */,
 			);

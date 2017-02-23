@@ -7,21 +7,41 @@
 //
 
 import Foundation
+import RxSwift
+import Moya
 
-struct DetailViewModel {
-    let title: String
-    let uri: URL
-    let caption: String
+class DetailViewModel {
+    let title: Observable<String>
+    let uri: Observable<URL>
+    let caption: Observable<String>
+    let assetId: Observable<String>
+    
+    var similarImageList: Observable<[CTImage]> {
+        return title
+            .observeOn(MainScheduler.instance)
+            .flatMapLatest { text -> Observable<CTImageList> in
+                return self.getImages(txt: text)
+            }.flatMapLatest { li -> Observable<[CTImage]> in
+                return self.getCTImages(imglist: li)
+            }.catchErrorJustReturn([])
+    }
+    
+    func getImages(txt: String) -> Observable<CTImageList> {
+        return GettyProvider.request(.similar(assetId: txt)).mapObject(CTImageList.self)
+    }
+    
+    func getCTImages(imglist: CTImageList) -> Observable<[CTImage]> {
+        return Observable.from(imglist.images)
+    }
     
     init(ctimage: CTImage) {
-        title = ctimage.title
+        //updateModel(ct..
+        title = Observable.from(ctimage.title)
+        assetId = Observable.from(ctimage.imageId)
         let strurl = (ctimage.sizes.first?.strUri)!
         let enstrurl = (strurl.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed))!
-        uri = URL.init(string: enstrurl)!
-        if let c = ctimage.caption {
-            caption = c
-        } else {
-            caption = ""
-        }
+        uri = Observable.from(URL.init(string: enstrurl))
+        caption = Observable.from(ctimage.caption).catchErrorJustReturn("")
     }
+
 }

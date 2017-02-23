@@ -1,0 +1,26 @@
+{
+    "result_count": 973,
+    "images": [
+               {
+               "id": "AA027431",
+               "asset_family": "creative",
+               "caption": null,
+               "collection_code": "PDI",
+               "collection_id": 2,
+               "collection_name": "Photodisc",
+               "display_sizes": [
+                                 {
+                                 "is_watermarked": false,
+                                 "name": "thumb",
+                                 "uri": "http://delivery.candidate-gettyimages.com/xt/AA027431.jpg?v=1&g=fs1|0|PDI|27|431&s=1&b=RTRE"
+                                 }
+                                 ],
+               "license_model": "royaltyfree",
+               "max_dimensions": {
+               "height": 4094,
+               "width": 4094
+               },
+               "title": "Kitten"
+               }
+               ]
+}
