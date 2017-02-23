@@ -12,9 +12,9 @@ import Moya
 
 struct DetailViewModel {
     let title: Observable<String>
-    let uri: URL
-    let caption: String
-    let assetId: String
+    let uri: Observable<URL>
+    let caption: Observable<String>
+    let assetId: Observable<String>
     
     var similarImageList: Observable<[CTImage]> {
         return title
@@ -36,14 +36,10 @@ struct DetailViewModel {
     
     init(ctimage: CTImage) {
         title = Observable.from(ctimage.title)
-        assetId = ctimage.imageId
+        assetId = Observable.from(ctimage.imageId)
         let strurl = (ctimage.sizes.first?.strUri)!
         let enstrurl = (strurl.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed))!
-        uri = URL.init(string: enstrurl)!
-        if let c = ctimage.caption {
-            caption = c
-        } else {
-            caption = ""
-        }
+        uri = Observable.from(URL.init(string: enstrurl))
+        caption = Observable.from(ctimage.caption).catchErrorJustReturn("")
     }
 }

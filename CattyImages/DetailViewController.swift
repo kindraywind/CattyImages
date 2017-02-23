@@ -18,6 +18,7 @@ class DetailViewController: UIViewController {
     let catImageView: UIImageView = UIImageView()
     let captionLabel: UILabel = UILabel()
     let titleLabel: UILabel = UILabel()
+    let similarLabel: UILabel = UILabel()
     let similarCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     let disposeBag = DisposeBag()
     
@@ -46,19 +47,19 @@ class DetailViewController: UIViewController {
     
     func setupUI() {
         self.view.backgroundColor = UIColor.white
-        catImageView.sd_setImage(with: viewModel.uri)
+    
         catImageView.contentMode = .scaleAspectFit
         self.view.addSubview(catImageView)
         
-        viewModel.title.bindTo(titleLabel.rx.text)
-//        titleLabel.text = viewModel.title
         titleLabel.textAlignment = NSTextAlignment.center
         self.view.addSubview(titleLabel)
         
-        captionLabel.text = viewModel.caption
         captionLabel.textAlignment = NSTextAlignment.center
         captionLabel.numberOfLines = 2
         self.view.addSubview(captionLabel)
+        
+        similarLabel.text = "Similar images:"
+        self.view.addSubview(similarLabel)
         
         similarCollectionView.register(UINib.init(nibName: "FeedCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         similarCollectionView.backgroundColor = UIColor.white
@@ -67,10 +68,19 @@ class DetailViewController: UIViewController {
         catImageView.anchorAndFillEdge(.top, xPad: 10, yPad: 10, otherSize: self.view.frame.size.height/2)
         titleLabel.alignAndFillWidth(align: .underCentered, relativeTo: catImageView, padding: 0, height: 20)
         captionLabel.alignAndFillWidth(align: .underCentered, relativeTo: titleLabel, padding: 0, height: 40)
-        similarCollectionView.alignAndFill(align: .underCentered, relativeTo: captionLabel, padding: 0)
+        similarLabel.alignAndFillWidth(align: .underCentered, relativeTo: captionLabel, padding: 0, height: 20)
+        similarCollectionView.alignAndFill(align: .underCentered, relativeTo: similarLabel, padding: 0)
     }
     
     func setupRx() {
+        viewModel.title.bindTo(titleLabel.rx.text).disposed(by: disposeBag)
+        viewModel.title.bindTo(captionLabel.rx.text).disposed(by: disposeBag)
+        viewModel.uri.distinctUntilChanged().subscribe{ u -> Void in
+            if let url = u.element {
+                self.catImageView.sd_setImage(with: url)
+            }
+            }.disposed(by: disposeBag)
+        
         viewModel.similarImageList
             .bindTo(similarCollectionView.rx.items(cellIdentifier: "Cell")) {
                 (index, ctimage: CTImage, cell: FeedCollectionViewCell) in
