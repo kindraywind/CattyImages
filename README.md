@@ -12,4 +12,4 @@ Support `iOS 9`
 
 then
 
-`pod install`
+`pod update && pod install`
