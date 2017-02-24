@@ -59,6 +59,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
         catImageView.contentMode = .scaleAspectFit
         self.view.addSubview(catImageView)
         
+        titleLabel.font = UIFont(name: titleLabel.font.fontName, size: 20)
         titleLabel.textAlignment = NSTextAlignment.center
         self.view.addSubview(titleLabel)
         
@@ -74,7 +75,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
         self.view.addSubview(similarCollectionView!)
         
         catImageView.anchorAndFillEdge(.top, xPad: 10, yPad: 10, otherSize: self.view.frame.size.height/2)
-        titleLabel.alignAndFillWidth(align: .underCentered, relativeTo: catImageView, padding: 0, height: 20)
+        titleLabel.alignAndFillWidth(align: .underCentered, relativeTo: catImageView, padding: 0, height: 25)
         captionLabel.alignAndFillWidth(align: .underCentered, relativeTo: titleLabel, padding: 0, height: 40)
         similarLabel.alignAndFillWidth(align: .underCentered, relativeTo: captionLabel, padding: 0, height: 20)
         similarCollectionView?.alignAndFillWidth(align: .underCentered, relativeTo: similarLabel, padding: 10, height: (self.view.frame.size.width / 3)+10)

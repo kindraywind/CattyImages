@@ -35,7 +35,6 @@ class DetailViewModel {
     }
     
     init(ctimage: CTImage) {
-        //updateModel(ct..
         title = Observable.from(ctimage.title)
         assetId = Observable.from(ctimage.imageId)
         let strurl = (ctimage.sizes.first?.strUri)!
