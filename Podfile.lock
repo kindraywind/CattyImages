@@ -1,0 +1,78 @@
+PODS:
+  - Agrume (3.1.1)
+  - Alamofire (4.3.0)
+  - AnimatedCollectionViewLayout (0.2.0)
+  - FLAnimatedImage (1.0.12)
+  - Moya (8.0.2):
+    - Moya/Core (= 8.0.2)
+  - Moya-ObjectMapper (2.3.1):
+    - Moya-ObjectMapper/Core (= 2.3.1)
+  - Moya-ObjectMapper/Core (2.3.1):
+    - Moya (~> 8.0)
+    - ObjectMapper (~> 2.2)
+  - Moya-ObjectMapper/RxSwift (2.3.1):
+    - Moya-ObjectMapper/Core
+    - Moya/RxSwift
+    - RxSwift (~> 3.1)
+  - Moya/Core (8.0.2):
+    - Alamofire (~> 4.1)
+    - Result (~> 3.0)
+  - Moya/RxSwift (8.0.2):
+    - Moya/Core
+    - RxSwift (~> 3.0)
+  - Neon (0.4.0)
+  - NYTPhotoViewer (1.1.0):
+    - NYTPhotoViewer/AnimatedGifSupport (= 1.1.0)
+    - NYTPhotoViewer/Core (= 1.1.0)
+  - NYTPhotoViewer/AnimatedGifSupport (1.1.0):
+    - FLAnimatedImage (~> 1.0.8)
+    - NYTPhotoViewer/Core
+  - NYTPhotoViewer/Core (1.1.0)
+  - ObjectMapper (2.2.3)
+  - Result (3.1.0)
+  - RxCocoa (3.2.0):
+    - RxSwift (~> 3.1)
+  - RxSwift (3.2.0)
+  - SDWebImage (3.7.3):
+    - SDWebImage/Core (= 3.7.3)
+  - SDWebImage/Core (3.7.3)
+
+DEPENDENCIES:
+  - Agrume (from `https://github.com/JanGorman/Agrume.git`)
+  - AnimatedCollectionViewLayout
+  - Moya-ObjectMapper
+  - Moya-ObjectMapper/RxSwift
+  - Moya/RxSwift
+  - Neon
+  - NYTPhotoViewer (~> 1.1.0)
+  - RxCocoa
+  - RxSwift
+  - SDWebImage (<= 3.7.3)
+
+EXTERNAL SOURCES:
+  Agrume:
+    :git: https://github.com/JanGorman/Agrume.git
+
+CHECKOUT OPTIONS:
+  Agrume:
+    :commit: 4fee2af652675cfb683ccd3040d91918a8ae7dac
+    :git: https://github.com/JanGorman/Agrume.git
+
+SPEC CHECKSUMS:
+  Agrume: d7f80bd3931cd2cb9488546089bab696ffca4118
+  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
+  AnimatedCollectionViewLayout: 6f385ed7deb673af8989f5240c4b0c32c9d25276
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
+  Moya: 47f61da5b634aa71f676431b64ee0f81e976296d
+  Moya-ObjectMapper: 952be2b261d38cf8d973b7e429708eb03d256e23
+  Neon: 7fb5a9327e7e57911843f608e08f4893a74deaf9
+  NYTPhotoViewer: e80e8767f3780d2df37c6f72cbab15d6c7232911
+  ObjectMapper: d3b3de11267f5d971f390eb8d63dd509116a4329
+  Result: 4e3ed5995ed94d0cd6a09be9a431fce3f3624bbf
+  RxCocoa: ccdf43101a70407097a29082f648ba1676075b30
+  RxSwift: 46574f70d416b7923c237195939cc488a7fbf3a0
+  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+
+PODFILE CHECKSUM: 0ab6f6bb7f729d42b1b260355ecc8382971d4783
+
+COCOAPODS: 1.2.0
