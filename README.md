@@ -1,4 +1,4 @@
-# CattyImages
+# CattyImages 1.01
 An another Photo viewer app... but only cats. 
 
 Enjoy browsing the cuteness on your iOS Device. Try using keywords such as `run`, `sleep`, `scottish` vise versa.
