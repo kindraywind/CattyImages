@@ -5,6 +5,7 @@ target 'CattyImages' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
   pod 'Agrume', :git => 'https://github.com/JanGorman/Agrume.git'
+  pod 'AnimatedCollectionViewLayout'
   pod 'Moya-ObjectMapper'
   pod 'Moya-ObjectMapper/RxSwift'
   pod 'Moya/RxSwift'

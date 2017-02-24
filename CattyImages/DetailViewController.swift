@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AnimatedCollectionViewLayout
 import Neon
 import SDWebImage
 import RxSwift
@@ -20,7 +21,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
     let captionLabel: UILabel = UILabel()
     let titleLabel: UILabel = UILabel()
     let similarLabel: UILabel = UILabel()
-    let horiFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+    let horiFlowLayout: AnimatedCollectionViewLayout = AnimatedCollectionViewLayout()
     var similarCollectionView: UICollectionView?
     
     let disposeBag = DisposeBag()
@@ -50,9 +51,11 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
     
     func setupUI() {
         self.view.backgroundColor = UIColor.white
-        
-//        similarCollectionView.isPagingEnabled = true
+
         self.navigationController?.navigationBar.isTranslucent = false
+        
+        let animator = LinearCardAttributesAnimator(minAlpha: 0.05, itemSpacing: 0.1, scaleRate: 0.9)
+        horiFlowLayout.animator = animator
         horiFlowLayout.scrollDirection = .horizontal
         similarCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: horiFlowLayout)
         
