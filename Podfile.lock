@@ -39,14 +39,14 @@ PODS:
 
 DEPENDENCIES:
   - Agrume (from `https://github.com/JanGorman/Agrume.git`)
-  - AnimatedCollectionViewLayout
-  - Moya-ObjectMapper
-  - Moya-ObjectMapper/RxSwift
-  - Moya/RxSwift
-  - Neon
-  - NYTPhotoViewer (~> 1.1.0)
-  - RxCocoa
-  - RxSwift
+  - AnimatedCollectionViewLayout (= 0.2.0)
+  - Moya-ObjectMapper (= 2.3.1)
+  - Moya-ObjectMapper/RxSwift (= 2.3.1)
+  - Moya/RxSwift (= 8.0.2)
+  - Neon (= 0.4.0)
+  - NYTPhotoViewer (= 1.1.0)
+  - RxCocoa (= 3.2.0)
+  - RxSwift (= 3.2.0)
   - SDWebImage (<= 3.7.3)
 
 EXTERNAL SOURCES:
@@ -73,6 +73,6 @@ SPEC CHECKSUMS:
   RxSwift: 46574f70d416b7923c237195939cc488a7fbf3a0
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
 
-PODFILE CHECKSUM: 0ab6f6bb7f729d42b1b260355ecc8382971d4783
+PODFILE CHECKSUM: e8ab6ab9be9c2b6e9d0ee4adfcdf59dddcde58e4
 
 COCOAPODS: 1.2.0
